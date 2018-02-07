@@ -12,11 +12,24 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        Fragment fragment = new MainFragment();
+        if (position < 0)
+            return null;
+
+        switch (position) {
+            case 0:
+                fragment = new MainFragment();
+                break;
+            case 1:
+                fragment = new CameraFragment();
+                break;
+        }
+
+        return fragment;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return 2;
     }
 }
