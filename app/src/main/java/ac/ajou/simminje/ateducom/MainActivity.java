@@ -1,14 +1,12 @@
 package ac.ajou.simminje.ateducom;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,3 +17,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().add(R.id.fragment_container, new MainFragment(), "MAIN_FRAGMENT").commit();
     }
 }
+
+
