@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import ac.ajou.simminje.ateducom.diet.DietFragment;
+import ac.ajou.simminje.ateducom.routine.RoutineFragment;
+import ac.ajou.simminje.ateducom.trigger.TriggerFragment;
+
 public class MainFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -20,8 +24,8 @@ public class MainFragment extends Fragment {
         Button dietButton = view.findViewById(R.id.button_diet);
         dietButton.setOnClickListener(v -> changeFragment(new DietFragment()));
 
-        Button basicButton = view.findViewById(R.id.button_basic);
-        basicButton.setOnClickListener(v -> changeFragment(new BasicFragment()));
+        Button basicButton = view.findViewById(R.id.button_trigger);
+        basicButton.setOnClickListener(v -> changeFragment(new TriggerFragment()));
 
         Button situationButton = view.findViewById(R.id.button_situation);
         situationButton.setOnClickListener(v -> changeFragment(new SituationFragment()));

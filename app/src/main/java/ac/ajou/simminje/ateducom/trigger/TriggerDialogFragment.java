@@ -1,4 +1,4 @@
-package ac.ajou.simminje.ateducom;
+package ac.ajou.simminje.ateducom.trigger;
 
 
 import android.Manifest;
@@ -15,19 +15,27 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,40 +43,82 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
-public class CameraFragment extends Fragment {
+import ac.ajou.simminje.ateducom.R;
+
+public class TriggerDialogFragment extends DialogFragment {
+    private TriggerDialogFragment.OnTriggerEventListener listener;
+
+    public interface OnTriggerEventListener {
+        void onConfirm(Trigger trigger);
+    }
+
+    public void setOnDietEventListener(TriggerDialogFragment.OnTriggerEventListener listener) {
+        this.listener = listener;
+    }
+
     private String[] permissions = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA}; //권한 설정 변수
+            Manifest.permission.CAMERA};
+
+    private Trigger trigger;
 
     private Uri photoUri;
+    private ImageView photoView;
+    private RadioButton like;
+    private RadioButton dislike;
+    private EditText description;
 
-    private static final int PICK_FROM_CAMERA = 1; //카메라 촬영으로 사진 가져오기
-    private static final int PICK_FROM_ALBUM = 2; //앨범에서 사진 가져오기
-    private static final int CROP_FROM_CAMERA = 3; //가져온 사진 자르기
+    private Button confirmButton;
+    private Button cancelButton;
 
-    private static final int MULTIPLE_PERMISSIONS = 101; //권한 동의 여부 문의 후 CallBack 함수에 쓰일 변수
+    private static final int PICK_FROM_CAMERA = 1;
+    private static final int PICK_FROM_ALBUM = 2;
+    private static final int CROP_FROM_CAMERA = 3;
 
-    private FloatingActionButton photoButton;
-    private ImageView photo_view;
+    private static final int MULTIPLE_PERMISSIONS = 101;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_camera, container, false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.dialog_trigger, container, false);
 
-        photo_view = view.findViewById(R.id.photo_view);
+        like = view.findViewById(R.id.radio_like);
+        dislike = view.findViewById(R.id.radio_dislike);
+        description = view.findViewById(R.id.description_edit_text);
 
-        photoButton = view.findViewById(R.id.photo_button);
-        photoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkPermissions();
-                setPopupMenu();
-            }
+        photoView = view.findViewById(R.id.image_view_trigger);
+        photoView.setOnClickListener(v -> {
+            checkPermissions();
+            setPopupMenu();
         });
 
+        confirmButton = view.findViewById(R.id.confirm_button);
+        confirmButton.setOnClickListener(v -> {
+            if (checkError())
+                addNewTrigger();
+        });
+
+        cancelButton = view.findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(v -> dismiss());
+
+        if (trigger != null) {
+            if (trigger.getType() == 0)
+                like.setChecked(true);
+            else
+                dislike.setChecked(false);
+            description.setText(trigger.getDescription());
+            Glide.with(photoView)
+                    .load(trigger.getProfileImageUrl())
+                    .apply(new RequestOptions()
+                            .override(150, 150)
+                            .placeholder(R.drawable.ic_plus)
+                    )
+                    .into(photoView);
+        }
         return view;
     }
 
@@ -81,20 +131,19 @@ public class CameraFragment extends Fragment {
                     return;
 
                 photoUri = data.getData();
-                photo_view.setVisibility(View.GONE);
+                photoView.setImageURI(photoUri);
+                photoView.setVisibility(View.GONE);
                 cropImage();
             } else if (requestCode == PICK_FROM_CAMERA) {
                 System.out.println("pick from camera");
                 cropImage();
                 MediaScannerConnection.scanFile(getActivity(),
                         new String[]{photoUri.getPath()}, null,
-                        new MediaScannerConnection.OnScanCompletedListener() {
-                            public void onScanCompleted(String path, Uri uri) {
-                            }
+                        (path, uri) -> {
                         });
             } else if (requestCode == CROP_FROM_CAMERA) {
                 try {
-                    photo_view.setImageURI(photoUri);
+                    photoView.setImageURI(photoUri);
                 } catch (Exception e) {
                     Log.e("ERROR", e.getMessage());
                 }
@@ -117,18 +166,16 @@ public class CameraFragment extends Fragment {
     }
 
     private void setPopupMenu() {
-        PopupMenu popup = new PopupMenu(getActivity(), photoButton);
+        PopupMenu popup = new PopupMenu(getActivity(), photoView);
         popup.getMenuInflater()
                 .inflate(R.menu.camera_popup_menu, popup.getMenu());
 
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.popup_take_picture)
-                    takePhoto();
-                else if (item.getItemId() == R.id.popup_photo_select)
-                    goToAlbum();
-                return true;
-            }
+        popup.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.popup_take_picture)
+                takePhoto();
+            else if (item.getItemId() == R.id.popup_photo_select)
+                goToAlbum();
+            return true;
         });
         popup.show();
     }
@@ -158,7 +205,7 @@ public class CameraFragment extends Fragment {
 
     private File createImageFile() throws IOException {
 
-        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "IP" + timeStamp + "_";
         File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/"); //test라는 경로에 이미지를 저장하기 위함
         if (!storageDir.exists()) {
@@ -184,7 +231,7 @@ public class CameraFragment extends Fragment {
 
         int size = list.size();
         if (size == 0) {
-            Toast.makeText(getActivity(), "취소 되었습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "cancel", Toast.LENGTH_SHORT).show();
         } else {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -218,7 +265,7 @@ public class CameraFragment extends Fragment {
 
             intent.putExtra("return-data", false);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString()); //Bitmap 형태로 받기 위해 해당 작업 진행
+            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
 
             Intent i = new Intent(intent);
             ResolveInfo res = list.get(0);
@@ -234,5 +281,48 @@ public class CameraFragment extends Fragment {
             i.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
             startActivityForResult(i, CROP_FROM_CAMERA);
         }
+    }
+
+    private void addNewTrigger() {
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd", Locale.getDefault());
+//
+//        String date = simpleDateFormat.format(System.currentTimeMillis());
+
+        int type = like.isChecked() ? 0 : 1;
+        Trigger trigger = new Trigger(FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), type, description.getText().toString(), "", description.getText().hashCode(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        if (listener != null) {
+
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageReference = storage.getReferenceFromUrl("gs://atedu2018.appspot.com").child("triggerImages");
+
+            if (trigger.getProfileImageUrl() != null) {
+
+                UploadTask uploadTask = storageReference.child(generateTempFilename()).putFile(photoUri);
+                uploadTask.addOnFailureListener(exception -> {
+
+                }).addOnSuccessListener(taskSnapshot -> {
+                    String url = taskSnapshot.getDownloadUrl().toString();
+                    trigger.setProfileImageUrl(url);
+                    listener.onConfirm(trigger);
+                });
+            }
+        }
+
+        dismiss();
+    }
+
+    public void setTrigger(Trigger trigger) {
+        this.trigger = trigger;
+    }
+
+    private boolean checkError() {
+        if (!like.isChecked() && !dislike.isChecked())
+            return false;
+        return true;
+    }
+
+    private String generateTempFilename() {
+        return UUID.randomUUID().toString();
     }
 }

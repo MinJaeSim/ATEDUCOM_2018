@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:text="TextView"
+        android:text="PROFILE"
         android:textAlignment="center"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,12 +43,12 @@
         app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
     <Button
-        android:id="@+id/button_basic"
+        android:id="@+id/button_trigger"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:text="Basic"
+        android:text="Trigger"
         app:layout_constraintEnd_toStartOf="@id/button_situation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_routine" />
@@ -61,7 +61,7 @@
         android:layout_marginTop="32dp"
         android:text="Situation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button_basic"
+        app:layout_constraintStart_toEndOf="@id/button_trigger"
         app:layout_constraintTop_toBottomOf="@+id/button_diet" />
 
     <Button
@@ -73,6 +73,6 @@
         android:text="entertainment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_basic" />
+        app:layout_constraintTop_toBottomOf="@+id/button_trigger" />
 
 </android.support.constraint.ConstraintLayout>
