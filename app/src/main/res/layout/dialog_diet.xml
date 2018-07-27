@@ -3,8 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="wrap_content"
     android:minWidth="300dp">
+=======
+    android:layout_height="wrap_content">
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -30,7 +34,11 @@
             android:layout_gravity="center_horizontal|center_vertical"
             android:ems="2"
             android:inputType="text|date"
+<<<<<<< HEAD
             android:text="시간"
+=======
+            android:text="when kid eat"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
             android:textAlignment="center"
             android:textColor="#000"
             android:theme="@style/EditTextStyle" />
@@ -48,7 +56,11 @@
             android:id="@+id/radio_breakfast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="아침" />
+=======
+            android:text="Breakfast" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/radio_lunch"
@@ -56,13 +68,21 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+<<<<<<< HEAD
             android:text="점심" />
+=======
+            android:text="Lunch" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/radio_dinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="저녁" />
+=======
+            android:text="Dinner" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
     </RadioGroup>
 
     <ImageView
@@ -101,7 +121,11 @@
             android:layout_gravity="center_horizontal|center_vertical"
             android:ems="2"
             android:inputType="text|date"
+<<<<<<< HEAD
             android:text="식단"
+=======
+            android:text="what kid eat"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
             android:textAlignment="center"
             android:textColor="#000"
             android:theme="@style/EditTextStyle" />
@@ -116,7 +140,11 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:padding="8dp"
+<<<<<<< HEAD
         android:text="취소"
+=======
+        android:text="Cancel"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -132,7 +160,11 @@
         android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
         android:padding="8dp"
+<<<<<<< HEAD
         android:text="확인"
+=======
+        android:text="Confirm"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -153,44 +185,72 @@
             android:id="@+id/mon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="월" />
+=======
+            android:text="M" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/tue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="화" />
+=======
+            android:text="T" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/wed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="수" />
+=======
+            android:text="W" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/thu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="목" />
+=======
+            android:text="T" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/fri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="금" />
+=======
+            android:text="F" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/sat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="토"
+=======
+            android:text="S"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
             android:textColor="#0000ff" />
 
         <RadioButton
             android:id="@+id/sun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="일"
+=======
+            android:text="S"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
             android:textColor="#ff0000" />
     </RadioGroup>
 

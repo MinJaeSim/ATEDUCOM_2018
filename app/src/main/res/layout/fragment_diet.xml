@@ -34,7 +34,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:checked="true"
+<<<<<<< HEAD
             android:text="식사"
+=======
+            android:text="Meals"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,7 +48,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+<<<<<<< HEAD
             android:text="간식"
+=======
+            android:text="Others"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </RadioGroup>
@@ -63,44 +71,72 @@
             android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="월" />
+=======
+            android:text="M" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/tue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="화" />
+=======
+            android:text="T" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/wed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="수" />
+=======
+            android:text="W" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/thu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="목" />
+=======
+            android:text="T" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/fri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="금" />
+=======
+            android:text="F" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
         <RadioButton
             android:id="@+id/sat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="토"
+=======
+            android:text="S"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
             android:textColor="#0000ff" />
 
         <RadioButton
             android:id="@+id/sun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="일"
+=======
+            android:text="S"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
             android:textColor="#ff0000" />
     </RadioGroup>
 
@@ -113,7 +149,11 @@
         android:layout_marginTop="8dp"
         android:background="#000"
         android:gravity="center"
+<<<<<<< HEAD
         android:text="아침"
+=======
+        android:text="Breakfast"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         android:textColor="#fff"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView_breakfast"
@@ -142,7 +182,11 @@
         android:layout_marginTop="8dp"
         android:background="#000"
         android:gravity="center"
+<<<<<<< HEAD
         android:text="점심"
+=======
+        android:text="Lunch"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         android:textColor="#fff"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView_lunch"
@@ -170,7 +214,11 @@
         android:layout_marginTop="8dp"
         android:background="#000"
         android:gravity="center"
+<<<<<<< HEAD
         android:text="저녁"
+=======
+        android:text="Dinner"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         android:textColor="#fff"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView_dinner"

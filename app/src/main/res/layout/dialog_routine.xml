@@ -13,7 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
+<<<<<<< HEAD
         android:text="등록"
+=======
+        android:text="Setting"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="@+id/time_layout"
@@ -101,7 +105,11 @@
             android:id="@+id/text_input_doing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:hint="일정" />
+=======
+            android:hint="do somthing" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
     </android.support.design.widget.TextInputLayout>
 
     <ImageView
@@ -125,7 +133,11 @@
         android:layout_marginBottom="8dp"
         android:layout_marginRight="12dp"
         android:padding="8dp"
+<<<<<<< HEAD
         android:text="취소"
+=======
+        android:text="Cancel"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -140,7 +152,11 @@
         android:layout_marginRight="16dp"
         android:padding="8dp"
 
+<<<<<<< HEAD
         android:text="확인"
+=======
+        android:text="Confirm"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

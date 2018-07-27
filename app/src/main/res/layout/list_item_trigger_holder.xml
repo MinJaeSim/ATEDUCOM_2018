@@ -27,9 +27,14 @@
         android:text="Do Something"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
+<<<<<<< HEAD
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image_view_trigger"
+=======
+        app:layout_constraintStart_toEndOf="@+id/image_view_trigger"
+        app:layout_constraintTop_toTopOf="parent"
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView

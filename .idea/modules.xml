@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/ATEDUCOM_2018-master.iml" filepath="$PROJECT_DIR$/ATEDUCOM_2018-master.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/ATEDUCOM_2018.iml" filepath="$PROJECT_DIR$/ATEDUCOM_2018.iml" />
+>>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
