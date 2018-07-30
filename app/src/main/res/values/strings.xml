@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ATEDUCOM</string>
+
+    <string-array name="bottom_nav_item_title">
+        <item>일상</item>
+        <item>상황</item>
+        <item>소셜</item>
+    </string-array>
 </resources>

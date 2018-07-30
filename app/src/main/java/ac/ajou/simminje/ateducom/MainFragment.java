@@ -21,31 +21,22 @@ public class MainFragment extends Fragment {
         Button routineButton = view.findViewById(R.id.button_routine);
         routineButton.setOnClickListener(v -> changeFragment(new RoutineFragment()));
 
-        Button dietButton = view.findViewById(R.id.button_diet);
-        dietButton.setOnClickListener(v -> changeFragment(new DietFragment()));
-
-        Button basicButton = view.findViewById(R.id.button_trigger);
-        basicButton.setOnClickListener(v -> changeFragment(new TriggerFragment()));
+//        Button dietButton = view.findViewById(R.id.button_diet);
+//        dietButton.setOnClickListener(v -> changeFragment(new DietFragment()));
+//
+//        Button basicButton = view.findViewById(R.id.button_trigger);
+//        basicButton.setOnClickListener(v -> changeFragment(new TriggerFragment()));
 
         Button situationButton = view.findViewById(R.id.button_situation);
         situationButton.setOnClickListener(v -> changeFragment(new SituationFragment()));
 
         Button entertainmentButton = view.findViewById(R.id.button_entertainment);
-        entertainmentButton.setOnClickListener(v -> changeFragment(new EntertainmentFragment()));
+        entertainmentButton.setOnClickListener(v -> changeFragment(new SocialFragment()));
 
-
-//        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        List<Integer> list = new ArrayList<>();
-//        for (int i = 0; i < 10; i++)
-//            list.add(i);
-//        recyclerView.setAdapter(new Adapter(list));
-//
         return view;
     }
 
     private void changeFragment(Fragment f) {
-//        FragmentManager fm = getFragmentManager();
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
     }
 }
