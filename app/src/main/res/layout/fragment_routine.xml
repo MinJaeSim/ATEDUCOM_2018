@@ -43,7 +43,7 @@
             android:layout_height="150dp"
             android:layout_weight="1"
             android:lineSpacingExtra="6dp"
-            android:textSize="14sp" />g
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/detail2"
