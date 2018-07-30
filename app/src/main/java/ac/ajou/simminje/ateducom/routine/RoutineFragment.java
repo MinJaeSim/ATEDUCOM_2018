@@ -1,49 +1,100 @@
 package ac.ajou.simminje.ateducom.routine;
 
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import ac.ajou.simminje.ateducom.R;
 
 public class RoutineFragment extends Fragment implements RoutineContract.View, RoutineDialogFragment.OnRoutineDialogEventListener {
 
     private RoutineContract.Presenter routinePresenter;
-    private RoutineAdapter adapter;
+
+    private MaterialCalendarView calendarView;
+
+    private EventDecorator decorator;
+
+    private int year;
+    private int month;
+    private int day;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_routine, container, false);
 
-
         routinePresenter = new RoutinePresenter(getContext());
         routinePresenter.setView(this);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_like);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        TextView routineDate = view.findViewById(R.id.routine_date);
+        TextView routineDetail = view.findViewById(R.id.routine_detail);
 
-        String uid = FirebaseAuth.getInstance().getUid();
-        adapter = new RoutineAdapter(FirebaseFirestore.getInstance().collection("Routine").whereEqualTo("uid", uid));
+        calendarView = view.findViewById(R.id.calendarView);
+        calendarView.addDecorators(new SundayDecorator(),          //일요일 색 설정
+                new SaturdayDecorator(),        //토요일 색 설정
+                new OneDayDecorator()
+        );
+        CalendarDay today = CalendarDay.today();
+        year = today.getYear();
+        month = today.getMonth() + 1;
+        day = today.getDay();
 
-        recyclerView.setAdapter(adapter);
+        String shot_Day = year + "년 " + month + "월 " + day + "일";
+        routineDate.setText(shot_Day);
 
-        routinePresenter.setAdapter(adapter);
+        decorator = new EventDecorator(Color.GREEN, today, getContext());
+        calendarView.addDecorator(decorator);
 
-        FloatingActionButton floatingActionButton = view.findViewById(R.id.add_button);
-        floatingActionButton.setOnClickListener(v -> showEditRoutineDialog(null, ""));
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView materialCalendarView, @NonNull CalendarDay calendarDay, boolean b) {
+//                Toast.makeText(getContext(), calendarDay.toString(), Toast.LENGTH_SHORT).show();
+                year = calendarDay.getYear();
+                month = calendarDay.getMonth() + 1;
+                day = calendarDay.getDay();
+
+
+                String shot_Day = year + "년 " + month + "월 " + day + "일";
+                routineDate.setText(shot_Day);
+                calendarView.clearSelection();
+                calendarView.removeDecorator(decorator);
+
+                decorator = new EventDecorator(Color.GREEN, calendarDay, getContext());
+                calendarView.addDecorator(decorator);
+            }
+        });
+
+
+        calendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
+            @Override
+            public void onMonthChanged(MaterialCalendarView materialCalendarView, CalendarDay calendarDay) {
+//                Toast.makeText(getContext(), calendarDay.toString() + "MMMMM", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
@@ -64,7 +115,7 @@ public class RoutineFragment extends Fragment implements RoutineContract.View, R
         builder.setPositiveButton("Yes",
                 (dialog, which) -> {
                     routinePresenter.removeAlarm(key);
-                    adapter.notifyDataSetChanged();
+//                    adapter.notifyDataSetChanged();
                 });
         builder.setNegativeButton("No",
                 (dialog, which) -> {
@@ -75,7 +126,95 @@ public class RoutineFragment extends Fragment implements RoutineContract.View, R
 
     @Override
     public void onConfirm(Routine routine) {
-        routinePresenter.addRoutine(routine);
-        adapter.notifyDataSetChanged();
+
     }
+
+    static class OneDayDecorator implements DayViewDecorator {
+
+        private CalendarDay date;
+
+        public OneDayDecorator() {
+            date = CalendarDay.today();
+        }
+
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+            return date != null && day.equals(date);
+        }
+
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.addSpan(new StyleSpan(Typeface.BOLD));
+            view.addSpan(new RelativeSizeSpan(1.4f));
+        }
+
+        public void setDate(Date date) {
+            this.date = CalendarDay.from(Calendar.getInstance().getTimeInMillis());
+        }
+    }
+
+    static class SundayDecorator implements DayViewDecorator {
+
+        private final Calendar calendar = Calendar.getInstance();
+
+        public SundayDecorator() {
+        }
+
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+            day.copyTo(calendar);
+            int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
+            return weekDay == Calendar.SUNDAY;
+        }
+
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.addSpan(new ForegroundColorSpan(Color.RED));
+        }
+    }
+
+    static class SaturdayDecorator implements DayViewDecorator {
+
+        private final Calendar calendar = Calendar.getInstance();
+
+        public SaturdayDecorator() {
+        }
+
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+            day.copyTo(calendar);
+            int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
+            return weekDay == Calendar.SATURDAY;
+        }
+
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.addSpan(new ForegroundColorSpan(Color.BLUE));
+        }
+    }
+
+    static class EventDecorator implements DayViewDecorator {
+
+        private final Drawable drawable;
+        private int color;
+        private CalendarDay dates;
+
+        public EventDecorator(int color, CalendarDay dates, Context context) {
+            drawable = context.getResources().getDrawable(R.drawable.more, null);
+            this.color = color;
+            this.dates = dates;
+        }
+
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+            return day.equals(dates);
+        }
+
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.setSelectionDrawable(drawable);
+            view.addSpan(new ForegroundColorSpan(Color.rgb(150, 220, 72)));
+        }
+    }
+
 }

@@ -342,7 +342,7 @@ public class DietDialogFragment extends DialogFragment {
                 uploadTask.addOnFailureListener(exception -> {
 
                 }).addOnSuccessListener(taskSnapshot -> {
-                    String url = taskSnapshot.getDownloadUrl().toString();
+                    String url = taskSnapshot.getUploadSessionUri().toString();
                     diet.setProfileImageUrl(url);
                     listener.onConfirm(diet);
                 });

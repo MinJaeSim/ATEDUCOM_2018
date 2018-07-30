@@ -219,7 +219,7 @@ public class RoutineDialogFragment extends DialogFragment {
                 uploadTask.addOnFailureListener(exception -> {
 
                 }).addOnSuccessListener(taskSnapshot -> {
-                    String url = taskSnapshot.getDownloadUrl().toString();
+                    String url = taskSnapshot.getUploadSessionUri().toString();
                     routine.setProfileImageUrl(url);
                     listener.onConfirm(routine);
                 });
