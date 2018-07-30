@@ -13,11 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-<<<<<<< HEAD
         android:text="어니저"
-=======
-        android:text="PROFILE"
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         android:textAlignment="center"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,11 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
-<<<<<<< HEAD
         android:text="일정"
-=======
-        android:text="Routine"
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         app:layout_constraintEnd_toStartOf="@id/button_diet"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_title" />
@@ -45,11 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="36dp"
-<<<<<<< HEAD
         android:text="식단"
-=======
-        android:text="Diet"
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/button_routine"
         app:layout_constraintTop_toBottomOf="@+id/text_title" />
@@ -60,11 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-<<<<<<< HEAD
         android:text="유발 요인"
-=======
-        android:text="Trigger"
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         app:layout_constraintEnd_toStartOf="@id/button_situation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_routine" />
@@ -75,11 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="32dp"
-<<<<<<< HEAD
         android:text="상황별 대응"
-=======
-        android:text="Situation"
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/button_trigger"
         app:layout_constraintTop_toBottomOf="@+id/button_diet" />
@@ -90,11 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-<<<<<<< HEAD
         android:text="소셜"
-=======
-        android:text="entertainment"
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_trigger" />

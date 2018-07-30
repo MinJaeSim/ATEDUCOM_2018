@@ -125,11 +125,7 @@ public class DietFragment extends Fragment implements DietContract.View, DietDia
 
         dietRadioButton.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
-<<<<<<< HEAD
                 textViewBreakfast.setText("아침");
-=======
-                textViewBreakfast.setText("Breakfast");
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
                 textViewLunch.setVisibility(View.VISIBLE);
                 textViewDinner.setVisibility(View.VISIBLE);
@@ -164,12 +160,7 @@ public class DietFragment extends Fragment implements DietContract.View, DietDia
 
                 recyclerViewLunch.setVisibility(View.GONE);
                 recyclerViewDinner.setVisibility(View.GONE);
-
-<<<<<<< HEAD
                 textViewBreakfast.setText("선호");
-=======
-                textViewBreakfast.setText("Kid likes");
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
 
                 othersAdapter = new DietAdapter(FirebaseFirestore.getInstance().collection("Others").whereEqualTo("uid", uid));
                 recyclerViewBreakfast.setAdapter(othersAdapter);

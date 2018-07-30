@@ -14,11 +14,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-<<<<<<< HEAD
         android:text="상황별 대응"
-=======
-        android:text="situation"
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

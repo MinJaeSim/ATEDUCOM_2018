@@ -167,10 +167,6 @@ public class DietDialogFragment extends DialogFragment {
                 photoView.setVisibility(View.GONE);
                 cropImage();
             } else if (requestCode == PICK_FROM_CAMERA) {
-<<<<<<< HEAD
-=======
-                System.out.println("pick from camera");
->>>>>>> 7808a3347eb8ea0c5c238c388304a01fd1bddafc
                 cropImage();
                 MediaScannerConnection.scanFile(getActivity(),
                         new String[]{photoUri.getPath()}, null,
