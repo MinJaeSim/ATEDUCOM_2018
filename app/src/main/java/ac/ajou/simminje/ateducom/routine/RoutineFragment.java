@@ -51,11 +51,13 @@ public class RoutineFragment extends Fragment implements RoutineContract.View, R
         routinePresenter.setView(this);
 
         TextView routineDate = view.findViewById(R.id.routine_date);
-        TextView routineDetail = view.findViewById(R.id.routine_detail);
+        TextView routineDetail1 = view.findViewById(R.id.detail1);
+        TextView routineDetail2 = view.findViewById(R.id.detail2);
 
         calendarView = view.findViewById(R.id.calendarView);
-        calendarView.addDecorators(new SundayDecorator(),          //일요일 색 설정
-                new SaturdayDecorator(),        //토요일 색 설정
+        calendarView.addDecorators(
+                new SundayDecorator(),
+                new SaturdayDecorator(),
                 new OneDayDecorator()
         );
         CalendarDay today = CalendarDay.today();
@@ -77,7 +79,6 @@ public class RoutineFragment extends Fragment implements RoutineContract.View, R
                 month = calendarDay.getMonth() + 1;
                 day = calendarDay.getDay();
 
-
                 String shot_Day = year + "년 " + month + "월 " + day + "일";
                 routineDate.setText(shot_Day);
                 calendarView.clearSelection();
@@ -88,13 +89,17 @@ public class RoutineFragment extends Fragment implements RoutineContract.View, R
             }
         });
 
-
         calendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView materialCalendarView, CalendarDay calendarDay) {
 //                Toast.makeText(getContext(), calendarDay.toString() + "MMMMM", Toast.LENGTH_SHORT).show();
             }
         });
+
+        routineDetail1.setText(" 날씨 : 흐림 \n 수면시간 : 6시간 \n 화장실 이용 여부 : O \n 약 복용 : X \n\n 전체적인 컨디션 : 상");
+        routineDetail2.setText(" 전달 사항 : \n 아침을 조금 먹음");
+
+        // 수면시간, 날씨, 화장실 이용 여부, 약 복용 여부, 특이 사항
         return view;
     }
 
